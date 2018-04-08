@@ -15,28 +15,57 @@ class ComparerTestCase(TestCase):
     def testProcessApisTypeChange(self):
         diffs = processApis(self.API_ORIGINAL, self.API_TYPE_CHANGE)
         self.assertTrue(len(diffs) > 0)
-        m = map(str, diffs)
 
-        for node in m:
-            predicate = node.split(':')
-            result = str(predicate[1]).strip()
-            self.assertEqual(
-                'expected u\'integer\', got u\'string\'',
-                result 
-            )
+        dif1 = diffs[0]
+        self.assertEqual(dif1.api_name, 'SHAS API') 
+        self.assertEqual(dif1.old_api_version, '0.0.1') 
+        self.assertEqual(dif1.new_api_version, '0.0.2') 
+        self.assertEqual(dif1.type, 'EXPECTED') 
+        self.assertEqual(dif1.old_value, '0.0.1') 
+        self.assertEqual(dif1.new_value, '0.0.2') 
+
+        dif1 = diffs[1]
+        self.assertEqual(dif1.api_name, 'SHAS API') 
+        self.assertEqual(dif1.old_api_version, '0.0.1') 
+        self.assertEqual(dif1.new_api_version, '0.0.2') 
+        self.assertEqual(dif1.type, 'EXPECTED') 
+        self.assertEqual(dif1.old_value, 'integer') 
+        self.assertEqual(dif1.new_value, 'string') 
+
     
     def testProcessApisDeprecatedMethod(self):
         diffs = processApis(self.API_ORIGINAL, self.API_DEPRECATED_METHOD)
         self.assertTrue(len(diffs) > 0)
-        m = map(str, diffs)
-        container = {
-            'unexpected value', 
-            'expected {u\'post\'', 
-            'expected {u\'get\''
-        }
 
-        for node in m:
-            predicate = node.split(':')
-            result = str(predicate[1]).strip()
-            self.assertIn(result, container)
+        dif1 = diffs[0]
+        self.assertEqual(dif1.api_name, 'SHAS API') 
+        self.assertEqual(dif1.old_api_version, '0.0.1') 
+        self.assertEqual(dif1.new_api_version, '0.0.3') 
+        self.assertEqual(dif1.type, 'EXPECTED') 
+        self.assertEqual(dif1.old_value, '0.0.1') 
+        self.assertEqual(dif1.new_value, '0.0.3') 
+
+        dif2 = diffs[1]
+        self.assertEqual(dif2.api_name, 'SHAS API') 
+        self.assertEqual(dif2.old_api_version, '0.0.1') 
+        self.assertEqual(dif2.new_api_version, '0.0.3') 
+        self.assertEqual(dif2.type, 'UNEXPECTED') 
+        self.assertEqual(dif2.old_value, None) 
+        self.assertTrue(len(dif2.new_value)) 
+
+        dif3 = diffs[2]
+        self.assertEqual(dif3.api_name, 'SHAS API') 
+        self.assertEqual(dif3.old_api_version, '0.0.1') 
+        self.assertEqual(dif3.new_api_version, '0.0.3') 
+        self.assertEqual(dif3.type, 'UNEXPECTED') 
+        self.assertEqual(dif3.old_value, None) 
+        self.assertTrue(len(dif3.new_value)) 
+
+        dif4 = diffs[3]
+        self.assertEqual(dif4.api_name, 'SHAS API') 
+        self.assertEqual(dif4.old_api_version, '0.0.1') 
+        self.assertEqual(dif4.new_api_version, '0.0.3') 
+        self.assertEqual(dif4.type, 'EXPECTED') 
+        self.assertTrue(len(dif4.old_value)) 
+        self.assertEqual(dif4.new_value, None) 
 
