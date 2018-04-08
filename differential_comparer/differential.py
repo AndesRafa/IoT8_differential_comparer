@@ -77,23 +77,8 @@ class Differential():
 
         value = str(msg[valueIndex + 1:]).strip()
         value = adjustValueFormat(value)
-        #value = str(value).replace('\'', '"')
-        #value = value.replace('u"', '"')
-        #value = value.replace('True', 'true')
-        #value = value.replace('False', 'false')
-
-        #j = json.load(io.StringIO(value.decode("utf-8")))
-
-        #self.recurseJSON(j, '')
 
         return None, value
-
-
-    def recurseJSON(self, parent, tab):
-        tab = '\t' + tab
-        for field in parent:
-            if len(field) <= 0:
-                return
 
 
 def adjustValueFormat(value):
