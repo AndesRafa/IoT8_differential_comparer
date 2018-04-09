@@ -57,17 +57,3 @@ def processApis(path_api1, path_api2):
     return parsed_diffs
 
 
-def main():
-    args = sys.argv
-    if len(args) < 3:
-        print('Requires API v1 and API v2 paths for comparisson')
-        return 2
-
-    path_api1 = args[1]
-    path_api2 = args[2]
-
-    print(processApis(path_api1, path_api2))
-
-
-if __name__ == '__main__':
-    main()

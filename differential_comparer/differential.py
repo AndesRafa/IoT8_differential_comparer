@@ -23,6 +23,18 @@ class Differential():
         self.old_value, self.new_value = self.ParseMessage(diff.message)
 
 
+    def toJSON(self):
+        return {
+                "api_name":self.api_name,
+                "old_api_version":self.old_api_version,
+                "new_api_version":self.new_api_version,
+                "path":self.path,
+                "type":self.type,
+                "old_value":self.old_value,
+                "new_value":self.new_value,
+                }
+
+
     def ParsePath(self, path):
         pattern = self.pattern
         route = []
