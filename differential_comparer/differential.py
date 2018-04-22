@@ -15,10 +15,10 @@ class Differential():
                 ):
         self.pattern = re.compile(EXP)
 
-        self.api_name = api_name
-        self.old_api_version = old_api_version
-        self.new_api_version = new_api_version
-        self.path = self.ParsePath(diff.path)
+        self.api_name = api_name.encode("utf-8")
+        self.old_api_version = old_api_version.encode("utf-8")
+        self.new_api_version = new_api_version.encode("utf-8")
+        self.path = [x.encode("utf-8") for x in self.ParsePath(diff.path)]
         self.type = 'EXPECTED' # EXPECTED or UNEXPECTED
         self.old_value, self.new_value = self.ParseMessage(diff.message)
 
