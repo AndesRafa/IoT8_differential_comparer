@@ -47,7 +47,7 @@ def processApis(path_api1, path_api2):
             diff_type = DifferentialType.DELETE
 
         api_differential.addElementDifferential(ElementDifferential(
-                    differential_type=str(diff_type),
+                    differential_type=diff_type.value,
                     element_path=element_path,
                     old_element=old_element,
                     new_element=new_element, 
